@@ -1,0 +1,8 @@
+{
+  "name": "agenda-personal",
+  "version": "1.0.0",
+  "description": "Agenda personal web lista para desplegar en Railway",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "express": "^4.21.2" }
+}

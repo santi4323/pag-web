@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171923">
+  <title>Takechi | Organiza tu día</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" role="img"><path d="M8 38 34 12M30 9l9-3-3 9M6 40l-2 4 4-2M11 35l4 4M8 38l4 4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="m28 15 5 5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg></span><span>takechi<span class="brand-dot">.</span></span></a>
+      <div class="side-label">MENÚ</div>
+      <button class="nav-item active" data-filter="all"><span>▦</span> Todas las tareas <span class="nav-count" id="allCount">0</span></button>
+      <button class="nav-item" data-filter="today"><span>◷</span> Para hoy</button>
+      <button class="nav-item" data-filter="upcoming"><span>▤</span> Próximas</button>
+      <button class="nav-item" data-filter="done"><span>✓</span> Completadas</button>
+      <div class="sidebar-bottom">
+        <div class="mini-card">
+          <div class="mini-icon">✧</div>
+          <strong>Un día a la vez.</strong>
+          <p>Organiza tus pendientes y avanza a tu ritmo.</p>
+        </div>
+        <div class="profile"><div class="avatar">T</div><div><strong>Takechi</strong><small>Espacio personal</small></div><span class="dots">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38 34 12M30 9l9-3-3 9M6 40l-2 4 4-2M11 35l4 4M28 15l5 5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg> takechi<span>.</span></div>
+        <div class="breadcrumb">Mi espacio <span>/</span> <b id="crumb">Todas las tareas</b></div>
+        <div class="top-actions"><span class="today-chip" id="dateChip"></span><button class="avatar small-avatar">T</button></div>
+      </header>
+
+      <section class="content">
+        <div class="welcome-row">
+          <div><p class="eyebrow" id="greeting">TU ESPACIO PERSONAL</p><h1 id="pageTitle">Tu día, a tu manera<span>.</span></h1><p class="subtitle">Un lugar sencillo para organizar tus ideas y pendientes.</p></div>
+          <button class="primary-btn" id="openModal"><span>＋</span> Nueva tarea</button>
+        </div>
+
+        <div class="stats">
+          <article class="stat-card"><div class="stat-top"><span>Tareas en total</span><span class="stat-symbol purple">▦</span></div><strong id="totalStat">0</strong><small>En tu agenda</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Por completar</span><span class="stat-symbol orange">◷</span></div><strong id="pendingStat">0</strong><small>Paso a paso</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Completadas</span><span class="stat-symbol green">✓</span></div><strong id="doneStat">0</strong><small>¡Buen trabajo!</small></article>
+          <article class="progress-card"><div class="progress-heading"><div><span>Tu progreso</span><strong id="progressText">0%</strong></div><span class="progress-emoji">✧</span></div><div class="progress-track"><div id="progressBar"></div></div><small>Todo avance cuenta.</small></article>
+        </div>
+
+        <section class="task-panel">
+          <div class="panel-heading"><div><h2 id="listTitle">Todas las tareas</h2><p id="listSubtitle">Aquí aparecerán tus actividades.</p></div><div class="filter-wrap"><label for="categoryFilter">Categoría</label><select id="categoryFilter"><option value="all">Todas</option><option>Personal</option><option>Estudio</option><option>Trabajo</option><option>Otro</option></select></div></div>
+          <div class="task-head"><span>ACTIVIDAD</span><span>FECHA</span><span>CATEGORÍA</span><span>ESTADO</span><span></span></div>
+          <div id="taskList" class="task-list"></div>
+          <div id="emptyState" class="empty-state"><div class="empty-art">✧</div><h3>Tu agenda está despejada</h3><p>Agrega una tarea y empieza a organizar tu día.</p><button class="text-btn" id="emptyAdd">＋ Crear primera tarea</button></div>
+        </section>
+        <footer>Hecho para organizar tus días <span>✦</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <form class="modal" id="taskForm">
+      <div class="modal-top"><div><p class="eyebrow">ORGANIZA TU TIEMPO</p><h2 id="modalTitle">Nueva tarea</h2></div><button type="button" class="close-btn" id="closeModal">×</button></div>
+      <label for="taskName">Nombre de la actividad</label><input id="taskName" maxlength="90" placeholder="Ej. Estudiar para el examen" required>
+      <div class="form-grid"><div><label for="taskDate">Fecha</label><input type="date" id="taskDate" required></div><div><label for="taskTime">Hora</label><input type="time" id="taskTime"></div></div>
+      <label for="taskCategory">Categoría</label><select id="taskCategory"><option>Personal</option><option>Estudio</option><option>Trabajo</option><option>Otro</option></select>
+      <label for="taskNotes">Notas <span class="optional">(opcional)</span></label><textarea id="taskNotes" rows="3" maxlength="240" placeholder="Agrega algún detalle..."></textarea>
+      <div class="modal-buttons"><button type="button" class="secondary-btn" id="cancelModal">Cancelar</button><button class="primary-btn" type="submit">Guardar tarea</button></div>
+    </form>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
